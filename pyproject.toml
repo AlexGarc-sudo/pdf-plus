@@ -1,24 +1,24 @@
-[tool.poetry]
+[project]
+requires-python = ">=3.11"
 name = "rocketpdf"
-version = "0.1.5"
+version = "0.2.0"
 description = "Comprehensive CLI tool for pdf handling"
-authors = ["D4ario0 <alexgarciat00@gmail.com>"]
-license = "AGPL-3.0"
+authors = [{name="D4ario0", email="alexgarciat00@gmail.com"}]
+license = {file = "LICENSE"}
 readme = "README.md"
+dependencies = [
+    "pymupdf>=1.24.12",
+    "comtypes>=1.4.8; sys_platform == 'win32'",
+    "unoconv>=0.9.0; sys_platform == 'linux'",
+    "click>=8.1.7",
+]
 
-[tool.poetry.dependencies]
-python = "^3.11"
-pymupdf = "^1.24.5"
-docx2pdf = "^0.1.8"
-pdf2docx = "^0.5.8"
-typer = "^0.12.3"
+[tool.ruff]
+line-length = 98
 
-[tool.poetry.group.dev.dependencies]
-pytest = "^8.2.2"
+[tool.ruff.lint]
+select = ["E", "F", "W", "Q", "I"]
+ignore = ["E203", "E501"]
 
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
-
-[tool.poetry.scripts]
-rocketpdf = "rocketpdf:rocketpdf"
+[project.scripts]
+rpdf = "rocketpdf.__main__:rpdf_cli"
