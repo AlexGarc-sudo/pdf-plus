@@ -1,6 +1,6 @@
 import click
 
-from .clitools import Colors, _clear_lines, prompter
+from .clitools import Colors, clear_lines, prompter
 from .commands import Commands
 
 
@@ -14,10 +14,10 @@ def rpdf_cli(ctx: click.Context):
     # Select subcommand from list
     if ctx.invoked_subcommand is None:
         click.echo(rpdf_cli.callback.__doc__, nl=False)
-        choice = prompter("", cli._format_description())
+        choice = prompter("", cli.__description__())
 
         if choice is None:
-            _clear_lines()
+            clear_lines()
             click.secho("Aborting...", fg=Colors.RED)
             return
 

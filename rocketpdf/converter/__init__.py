@@ -10,8 +10,6 @@ class ConverterEngine(Protocol):
     Implementing classes should provide the functionality to convert:
     - DOCX files to PDF format.
     - PDF files to DOCX format.
-    - PPTX files to PDF format.
-    - XLSX files to PDF format (experimental).
 
     """
 
@@ -19,13 +17,11 @@ class ConverterEngine(Protocol):
 
     def pdf_to_docx(self, input_file: str, output_file: str) -> None: ...
 
-    def pptx_to_pdf(self, input_file: str, output_file: str) -> None: ...
-
-    def xlsx_to_pdf(self, input_file: str, output_file: str) -> None: ...
-
 
 def get_local_engine() -> ConverterEngine:
-    match system():
+    """Returns the default converting engine based on the operating system used"""
+    op_s = system()
+    match op_s:
         case "Windows":
             from .win32 import WindowsConverterEngine
 
@@ -39,7 +35,7 @@ def get_local_engine() -> ConverterEngine:
 
             return DarwinConverterEngine()
         case _:
-            raise NotImplementedError(f"Unsupported Operating System: {system()}")
+            raise NotImplementedError(f"Unsupported Operating System: {op_s}")
 
 
-LOCAL_ENGINE = get_local_engine()
+LOCAL_ENGINE = get_local_engine

@@ -20,6 +20,25 @@ class SaveFormat(IntEnum):
 
 
 class WindowsConverterEngine:
+    """
+    WindowsConverterEngine
+
+    This class provides a utility for converting Microsoft Office files between formats
+    using the COM interface on Windows systems. It supports conversions for Word, Excel,
+    and PowerPoint files into formats like PDF, DOCX, PPTX, and XLSX.
+
+    Dependencies:
+        - Requires the `comtypes` package for COM automation. Install it via `pip install comtypes`.
+        - Runs only on Windows systems with the corresponding Microsoft Office applications installed.
+
+    Methods:
+        - docx_to_pdf(input_file: str, output_file: str): Converts a Word DOCX file to a PDF.
+        - pdf_to_docx(input_file: str, output_file: str): Converts a PDF file to a Word DOCX.
+        - pptx_to_pdf(input_file: str, output_file: str): Converts a PowerPoint PPTX file to a PDF (experimental).
+        - xlsx_to_pdf(input_file: str, output_file: str): Converts an Excel XLSX file to a PDF (experimental).
+
+    """
+
     def __init__(self) -> None:
         try:
             import comtypes.client
@@ -104,6 +123,7 @@ class WindowsConverterEngine:
             save_format=SaveFormat.EXCEL_TO_PDF,
         )
 
+    # Helper function
     @staticmethod
     def _check_app_installed(app: AppType) -> bool:
         """

@@ -30,6 +30,7 @@ def prompter(prompt: str, choices: list[str]) -> Optional[str]:
     # Reprints the selected option next to the prompt
     clear_lines()
     secho(prompt, fg=Colors.YELLOW, nl=False)
+
     if selection:
         echo(selection.split(maxsplit=1)[0])
 

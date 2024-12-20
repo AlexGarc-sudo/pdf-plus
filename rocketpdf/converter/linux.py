@@ -8,12 +8,10 @@ FILE_EXT = Literal["pdf", "docx"]
 class LinuxConverterEngine:
     def __init__(self):
         if not self._is_libreoffice_installed():
-            raise EnvironmentError(
-                "LibreOffice is not installed on this system. Install with: sudo apt install libreoffice "
-            )
+            raise EnvironmentError("LibreOffice is not installed on this system. ")
 
         if not self._is_unoconv_installed():
-            raise EnvironmentError("Unoconv is not installed. Install with: pip install unoconv")
+            raise EnvironmentError("Unoconv is not installed. Install with: pip3 install unoconv")
 
     def _convert(self, input_file: str, output_file: str, target_format: FILE_EXT) -> None:
         """Generic conversion function using unoconv."""
@@ -42,6 +40,7 @@ class LinuxConverterEngine:
         """Convert XLSX to PDF."""
         return self._convert(input_file, output_file, "pdf")
 
+    # Helper functions
     @staticmethod
     def _is_libreoffice_installed() -> bool:
         """Check if LibreOffice is installed."""
